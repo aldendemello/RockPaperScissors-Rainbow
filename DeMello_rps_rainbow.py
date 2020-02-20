@@ -1,7 +1,7 @@
 #Author: Alden DeMello
 #File Name: DeMello_rps_rainbow.py
 #Date: 4/23/2019
-#Description: A simple game of rock paper scissors, with a twist!
+#Description: A simple game of rock paper scissors, with the clients expectations!
 
 from easygui import * #Import everything from easygui
 import sys #Import sys
@@ -17,18 +17,18 @@ while flag_program == True: #Infinite Loop, until the user quits
 
         msg_name = 'Enter your Display Name' #Message to display to tell the user what to enter
 
-        title = 'Rock Paper Scissors: Rainbow Edition' #Title of the widget
+        title = 'Sunny Storm and Snow' #Title of the widget
 
         user_name = enterbox(msg_name, title) #Call the enterbox function
 
         return user_name #Return user name
 
     def turns(): #Turns function
-
+        #image = 'DeMello_best_of.jpg' exceeds 20 file limit
         turns = ['ONE', 'THREE', 'YOUR CHOICE'] #Game Choices #ADD RANDOM?
-        welcome_msg = '                 CHOOSE THE NUMBER OF TURNS BELOW!          ' #Inform the user what to do
-        title = 'Rock Paper Scissors: Rainbow Edition'
-        turn_choice = buttonbox(welcome_msg, title, choices=turns) #Gane choice menu
+        turns_msg = '                       CHOOSE THE BEST OF BELOW!          ' #Inform the user what to do
+        title = 'Sunny Storm and Snow'
+        turn_choice = buttonbox(turns_msg, title, choices=turns) #Gane choice menu
 
         turn_choices = 0 #Set turns default to 0
         
@@ -49,11 +49,34 @@ while flag_program == True: #Infinite Loop, until the user quits
 
     def rps_game(turns): #Game function
 
-        flag_draw_1 = True
+        #Default text
+        title = 'Sunny Storm and Snow'
+        tie_text = 'The game was a tie'
+        cpu_wins = 'The computer won :('
+        user_wins = 'You won!'
 
-        flag_draw_2 = True
+        #Computer Defaults
+        comp_choice = 'The computer chose:'
+        comp_choice_img1 = 'DeMello_sunny.jpg'
+        comp_choice_img2 = 'DeMello_storm.jpg'
+        comp_choice_img3 = 'DeMello_snow.jpg'
 
-        flag_draw_3 = True
+        versus = ' Computer vs YOU'
+
+        #Images
+        tie_breaker_img = 'DeMello_tie_breaker.jpg'
+        comp_win_img = 'DeMello_comp_win.jpg'
+        user_win_img = 'DeMello_user_win.jpg'
+
+        sun_v_sun = 'DeMello_sunny_vs_sunny.jpg'
+        sun_v_sto = 'DeMello_sunny_vs_storm.jpg'
+        sun_v_sno = 'DeMello_sunny_vs_snow.jpg'
+        sto_v_sun = 'DeMello_storm_vs_sunny.jpg'
+        sto_v_sto = 'DeMello_storm_vs_storm.jpg'
+        sto_v_sno = 'DeMello_storm_vs_snow.jpg'
+        sno_v_sun = 'DeMello_snow_vs_sunny.jpg'
+        sno_v_sto = 'DeMello_snow_vs_storm.jpg'
+        sno_v_sno = 'DeMello_snow_vs_snow.jpg'
 
                 #COMP #USER
         scores = [0, 0] #Local list to get scores
@@ -66,163 +89,414 @@ while flag_program == True: #Infinite Loop, until the user quits
 
         for game_loop in range(turns): #Loop for the number of turns
 
+            usr_choice = usr_choice_screen() #Call the user choice screen function
+
             pc_choice = rand_comp_choice() #Call the random computer choice function
 
-            usr_choice = usr_choice_screen() #
+            print(pc_choice)
 
+            if pc_choice == 1 and usr_choice == 1: #SUNNY SUNNY
 
-            
+                flag_draw = True #Enable boolean
 
-            if pc_choice == 1 and usr_choice == 1: #ROCK ROCK
+                msgbox(comp_choice,title,image=comp_choice_img1)
 
-                print('Draw') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(versus,title,image=sun_v_sun)
+
+                msgbox(tie_text,title, image=tie_breaker_img)
 
                 draw_score += 1 #Increment draw_score by 1
 
-                #IMAGE OF DRAW 
-
-                while flag_draw_1 == True:
-
-                    pc_choice = rand_comp_choice() #Call the random computer choice function
+                while flag_draw == True: #While true
 
                     usr_choice = usr_choice_screen() # Call the user choice screen
 
-                    if pc_choice == 2 and usr_choice == 1: #PAPER ROCK
+                    pc_choice = rand_comp_choice() #Call the random computer choice function
 
-                        print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                    print(pc_choice)
 
+                    if pc_choice == 2 and usr_choice == 1: #STORM SUNNY
+
+                        msgbox(comp_choice,title, image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sun)
+
+                        msgbox(cpu_wins,title, image=comp_win_img)
+                        
                         comp_score += 1 #Increment comp_score by 1
 
-                        flag_draw = False
+                        flag_draw = False #Disable boolean
           
-                    elif pc_choice == 3 and usr_choice == 1: #SCISSOR ROCK
+                    elif pc_choice == 3 and usr_choice == 1: #SNOW SUNNY
+                        
+                        msgbox(comp_choice,title, image=comp_choice_img3)
 
-                        print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(versus,title,image=sno_v_sun)
+
+                        msgbox(user_wins,title, image=user_win_img)
 
                         user_score += 1 #Increment user_score by 1
 
-                        flag_draw = False
+                        flag_draw = False #Disable boolean
 
-                    else:
+                    elif pc_choice == 2 and usr_choice == 3: #STORM SNOW
 
-                        print('draw')
+                        msgbox(comp_choice,title, image=comp_choice_img2)
 
+                        msgbox(versus,title,image=sto_v_sno)
 
+                        msgbox(user_wins,title,image=user_win_img)
 
+                        user_score += 1 #Increment user_score by 1
 
+                        flag_draw = False #Disable boolean
+                        
+                    elif pc_choice == 3 and usr_choice == 2: #SNOW STORM
+
+                        msgbox(comp_choice,title, image=comp_choice_img3)
+
+                        msgbox(versus,title,image=sno_v_sto)
+
+                        msgbox(cpu_wins,title, image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw = False #Disable boolean
+                        
+                    elif pc_choice == 1 and usr_choice == 2: #SUNNY STORM
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sto)
+
+                        msgbox(user_wins,title,image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw = False #Disable boolean
+
+                    elif pc_choice == 1 and usr_choice == 3: #SUNNY SNOW
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sno)
+
+                        msgbox(cpu_wins,title,image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw = False #Disable boolean
+
+                    elif pc_choice == 1 and usr_choice == 1: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sun)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+                    
+                    elif pc_choice == 2 and usr_choice == 2: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sto)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+
+                    elif pc_choice == 3 and usr_choice == 3: #If condition is met
                 
+                        msgbox(comp_choice,title,image=comp_choice_img3)
 
-            elif pc_choice == 2 and usr_choice == 1: #PAPER ROCK
+                        msgbox(versus,title,image=sno_v_sno)
 
-                print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(tie_text,title, image=tie_breaker_img)
+
+            elif pc_choice == 2 and usr_choice == 1: #STORM SUNNY
+
+                msgbox(comp_choice,title, image=comp_choice_img2)
+
+                msgbox(versus,title,image=sto_v_sun)
+
+                msgbox(cpu_wins,title,image=comp_win_img)
 
                 comp_score += 1 #Increment comp_score by 1
   
-            elif pc_choice == 3 and usr_choice == 1: #SCISSOR ROCK
+            elif pc_choice == 3 and usr_choice == 1: #SNOW SUNNY
 
-                print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(comp_choice,title, image=comp_choice_img3)
+
+                msgbox(versus,title,image=sno_v_sun)
+
+                msgbox(user_wins,title,image=user_win_img)
 
                 user_score += 1 #Increment user_score by 1
 
+            elif pc_choice == 2 and usr_choice == 2: #STORM STORM
 
+                flag_draw_2 = True #Enable boolean
 
-                
+                msgbox(comp_choice,title, image=comp_choice_img2)
 
-            elif pc_choice == 2 and usr_choice == 2: #PAPER PAPER
+                msgbox(versus,title,image=sto_v_sto)
 
-                print('Draw') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(tie_text,title, image=tie_breaker_img)
 
                 draw_score += 1 #Increment draw_score by 1
 
-                while flag_draw_2 == True:
+                while flag_draw_2 == True: #While true
+ 
+                    usr_choice = usr_choice_screen() # Call the user choice screen
 
                     pc_choice = rand_comp_choice() #Call the random computer choice function
 
-                    usr_choice = usr_choice_screen() # Call the user choice screen
-                    
-                    if pc_choice == 2 and usr_choice == 3: #PAPER SCISSOR
+                    print(pc_choice)
 
-                        print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                    if pc_choice == 2 and usr_choice == 1: #STORM SUNNY
 
-                        user_score += 1 #Increment user_score by 1
+                        msgbox(comp_choice,title, image=comp_choice_img2)
 
-                        flag_draw_2 = False
-                
-                    elif pc_choice == 3 and usr_choice == 2: #SCISSOR PAPER
+                        msgbox(versus,title,image=sto_v_sun)
 
-                        print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(cpu_wins,title, image=comp_win_img)
 
                         comp_score += 1 #Increment comp_score by 1
 
-                        flag_draw_2 = False
+                        flag_draw_2 = False #Disable boolean
+          
+                    elif pc_choice == 3 and usr_choice == 1: #SNOW SUNNY
 
-                    else:
+                        msgbox(comp_choice,title, image=comp_choice_img3)
 
-                        print('draw')
+                        msgbox(versus,title,image=sno_v_sun)
 
+                        msgbox(user_wins,title, image=user_win_img)
 
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_2 = False #Disable boolean
+
+                    elif pc_choice == 2 and usr_choice == 3: #STORM SNOW
+
+                        msgbox(comp_choice,title, image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sno)
+
+                        msgbox(user_wins,title,image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_2 = False #Disable boolean
+                        
+                    elif pc_choice == 3 and usr_choice == 2: #SNOW STORM
+
+                        msgbox(comp_choice,title, image=comp_choice_img3)
+
+                        msgbox(versus,title,image=sno_v_sto)
+
+                        msgbox(cpu_wins,title,image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw_2 = False #Disable boolean
+                        
+                    elif pc_choice == 1 and usr_choice == 2: #SUNNY STORM
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sto)
+
+                        msgbox(user_wins,title,image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_2 = False #Disable boolean
+
+                    elif pc_choice == 1 and usr_choice == 3: #SUNNY SNOW
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sno)
+
+                        msgbox(cpu_wins,title,image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw_2 = False #Disable boolean
+                    elif pc_choice == 1 and usr_choice == 1: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sun)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+                    
+                    elif pc_choice == 2 and usr_choice == 2: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sto)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+
+                    elif pc_choice == 3 and usr_choice == 3: #If condition is met
                 
+                        msgbox(comp_choice,title,image=comp_choice_img3)
 
-            elif pc_choice == 2 and usr_choice == 3: #PAPER SCISSOR
+                        msgbox(versus,title,image=sno_v_sno)
 
-                print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(tie_text,title, image=tie_breaker_img)
+
+            elif pc_choice == 2 and usr_choice == 3: #STORM SNOW
+
+                msgbox(comp_choice,title, image=comp_choice_img2)
+
+                msgbox(versus,title,image=sto_v_sno)
+
+                msgbox(user_wins,title,image=user_win_img)
 
                 user_score += 1 #Increment user_score by 1
                 
-            elif pc_choice == 3 and usr_choice == 2: #SCISSOR PAPER
+            elif pc_choice == 3 and usr_choice == 2: #SNOW STORM
 
-                print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(comp_choice,title, image=comp_choice_img3)
+
+                msgbox(versus,title,image=sno_v_sto)
+
+                msgbox(cpu_wins,title,image=comp_win_img)
 
                 comp_score += 1 #Increment comp_score by 1
 
+            elif pc_choice == 3 and usr_choice == 3: #SNOW SNOW
 
+                flag_draw_3 = True #Enable boolean
 
-                
+                msgbox(comp_choice,title, image=comp_choice_img3)
 
-            elif pc_choice == 3 and usr_choice == 3: #SCISSOR SCISSOR
+                msgbox(versus,title,image=sno_v_sno)
 
-                print('Draw') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(tie_text,title, image=tie_breaker_img)
 
                 draw_score += 1 #Increment draw_score by 1
 
                 while flag_draw_3 == True:
+
+                    usr_choice = usr_choice_screen() # Call the user choice screen
+
                     pc_choice = rand_comp_choice() #Call the random computer choice function
 
-                    usr_choice = usr_choice_screen() # Call the usser choice screen
+                    print(pc_choice)
 
-                    if pc_choice == 1 and usr_choice == 2: #ROCK PAPER
+                    if pc_choice == 2 and usr_choice == 1: #STORM SUNNY
 
-                        print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(comp_choice,title, image=comp_choice_img2)
 
-                        user_score += 1 #Increment user_score by 1
+                        msgbox(versus,title,image=sto_v_sun)
 
-                        flag_draw_3 = False
-
-                    elif pc_choice == 1 and usr_choice == 3: #ROCK SCISSOR
-
-                        print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(cpu_wins,title, image=comp_win_img)
 
                         comp_score += 1 #Increment comp_score by 1
 
-                        flag_draw_3 = False
+                        flag_draw_3 = False #Disable boolean
+          
+                    elif pc_choice == 3 and usr_choice == 1: #SNOW SUNNY
 
-                    else:
+                        msgbox(comp_choice,title, image=comp_choice_img3)
 
-                        print('draw')
+                        msgbox(versus,title,image=sno_v_sun)
+
+                        msgbox(user_wins,title,image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_3 = False #Disable boolean
+
+                    elif pc_choice == 2 and usr_choice == 3: #STORM SNOW
+
+                        msgbox(comp_choice,title, image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sno)
+
+                        msgbox(user_wins,title,image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_3 = False #Disable boolean
                         
+                    elif pc_choice == 3 and usr_choice == 2: #SNOW STORM
 
-            elif pc_choice == 1 and usr_choice == 2: #ROCK PAPER
+                        msgbox(comp_choice,title, image=comp_choice_img3)
 
-                print('Winner: User') #Print ============================ FOR TESTING, REMOVE AFTER
+                        msgbox(versus,title,image=sno_v_sto)
+
+                        msgbox(cpu_wins,title,image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw_3 = False #Disable boolean
+                        
+                    elif pc_choice == 1 and usr_choice == 2: #SUNNY STORM
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sto)
+
+                        msgbox(user_wins,title, image=user_win_img)
+
+                        user_score += 1 #Increment user_score by 1
+
+                        flag_draw_3 = False #Disable boolean
+
+                    elif pc_choice == 1 and usr_choice == 3: #SUNNY SNOW
+
+                        msgbox(comp_choice,title, image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sno)
+
+                        msgbox(cpu_wins,title, image=comp_win_img)
+
+                        comp_score += 1 #Increment comp_score by 1
+
+                        flag_draw_3 = False #Disable boolean
+
+                    elif pc_choice == 1 and usr_choice == 1: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img1)
+
+                        msgbox(versus,title,image=sun_v_sun)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+                    
+                    elif pc_choice == 2 and usr_choice == 2: #If condition is met
+
+                        msgbox(comp_choice,title,image=comp_choice_img2)
+
+                        msgbox(versus,title,image=sto_v_sto)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+
+                    elif pc_choice == 3 and usr_choice == 3: #If condition is met
+                
+                        msgbox(comp_choice,title,image=comp_choice_img3)
+
+                        msgbox(versus,title,image=sno_v_sno)
+
+                        msgbox(tie_text,title, image=tie_breaker_img)
+                        
+            elif pc_choice == 1 and usr_choice == 2: #SUNNY STORM
+
+                msgbox(comp_choice,title, image=comp_choice_img1)
+
+                msgbox(user_wins,title,image=user_win_img)
 
                 user_score += 1 #Increment user_score by 1
 
-            elif pc_choice == 1 and usr_choice == 3: #ROCK SCISSOR
+            elif pc_choice == 1 and usr_choice == 3: #SUNNY SNOW
 
-                print('Winner: Computer') #Print ============================ FOR TESTING, REMOVE AFTER
+                msgbox(comp_choice,title, image=comp_choice_img1)
+
+                msgbox(cpu_wins,title, image=comp_win_img)
 
                 comp_score += 1 #Increment comp_score by 1
-                
 
         scores.insert(0, comp_score) #Insert the computer score into the score list
         
@@ -235,20 +509,18 @@ while flag_program == True: #Infinite Loop, until the user quits
         user_score = int(user_score) #Cast user_score to an int
 
         draw_score = int(draw_score) #Cast user_score to an int
-
-        print(scores) #Print the Scores List ======================= FOR DEBUGGING, REMOVE AFTER
-        
+ 
         return scores #Return Scores
 
     def welcome(): #Welcome function
 
-        rainbow = 'rainbows_new.jpg' #Image        
+        rainbow = 'DeMello_welcome_img.jpg' #Image        
         
         choices = ['HELP','PLAY','QUIT'] #Choices
        
-        welcome_msg = '                 Welcome to RPS!           '#Welcome Message
+        welcome_msg = ''#Welcome Message
 
-        title = 'Rock Paper Scissors: Rainbow Edition'
+        title = 'Sunny Storm and Snow'
        
         welcome_menu = buttonbox(welcome_msg, title, image=rainbow, choices=choices) #Welcome menu
 
@@ -256,11 +528,11 @@ while flag_program == True: #Infinite Loop, until the user quits
     
     def usr_choice_screen(): #User choice screen
 
-        rainbow_img = r'C:\Users\alden\Desktop\Software Development\rps_rainbow.jpg'
+        rainbow_img = 'DeMello_rps_rainbow.jpg' #Rainbow Image
 
-        title = 'Rock Paper Scissors: Rainbow Edition'
+        title = 'Sunny Storm and Snow'
 
-        choices = ['SUNSHINE', 'STORM', 'RAIN', 'RANDOM'] #Game Choices #ADD RANDOM?
+        choices = ['SUNNY', 'STORM', 'SNOW', 'RANDOM'] #Game Choices #ADD RANDOM?
         
         welcome_msg = '                             CHOOSE a rainbow below!           ' #Inform the user what to do
         
@@ -268,7 +540,7 @@ while flag_program == True: #Infinite Loop, until the user quits
 
         user_choice = 0 #Set user choice to equal 0
 
-        if usr_choice == 'SUNSHINE': #If condition is met 
+        if usr_choice == 'SUNNY': #If condition is met 
 
             user_choice = 1
             
@@ -276,7 +548,7 @@ while flag_program == True: #Infinite Loop, until the user quits
 
             user_choice = 2
 
-        elif usr_choice == 'RAIN': #If condition is met
+        elif usr_choice == 'SNOW': #If condition is met
 
             user_choice = 3
 
@@ -301,13 +573,31 @@ while flag_program == True: #Infinite Loop, until the user quits
 
     def user_choice_turns(): #User choice turns function
 
-        flag_odd = True
+        flag_odd = True #Boolean for loop
 
-        msg_turns = 'Choose your own number of turns, ONLY ODD NUMBERS(ex. 1,3,5,7,9 etc)! \nEnter ONLY the number value below!' #Turns message
+        flag_string = True #Boolean for loop
 
-        title = 'Rock Paper Scissors: Rainbow Edition' #Title of the widget
+        msg_turns = 'Choose your own number of best of, ONLY ODD NUMBERS(ex. 1,3,5,7,9 etc)! \nEnter ONLY the number value below!' #Turns message
+
+        title = 'Sunny Storm and Snow' #Title of the widget
+
+        enter_num = 'Please enter a number only!'
 
         user_turns = enterbox(msg_turns, title) #Call the enter box function
+
+        if user_turns.isalpha() == True: #If condition is met
+            
+            while flag_string == True: #While true
+
+                user_turns = enterbox(msg_turns, title) #Call the enter box function
+
+                if user_turns.isnumeric() == True: #If condition is met
+
+                    flag_string = False #Disable flag
+                
+                else:
+
+                    msgbox(enter_num, title)
 
         if user_turns == '' or user_turns == ' ': #If condition is met
 
@@ -315,21 +605,25 @@ while flag_program == True: #Infinite Loop, until the user quits
 
         user_turns = int(user_turns) #Cast the turns into an integer
 
-        if user_turns % 2 == 0:
+        if user_turns % 2 == 0: #If condition is met
 
-            while flag_odd == True:
+            while flag_odd == True: #While true
+                
+                odd_enter = 'Please enter an odd number!' #Message to inform the user what to enter
+
+                msgbox(odd_enter,title) 
 
                 user_turns = enterbox(msg_turns, title) #Call the enter box function
 
                 user_turns = int(user_turns) #Cast the turns into an integer
 
-                if user_turns % 2 == 0:
+                if user_turns % 2 == 0: #If condition is met
 
                      user_turns = enterbox(msg_turns, title) #Call the enter box function
 
-                elif user_turns % 2 == 1:
+                elif user_turns % 2 == 1: #If condition is met
 
-                    flag_odd = False
+                    flag_odd = False #Disable boolean
 
         return user_turns #Return user turns
         
@@ -376,37 +670,30 @@ while flag_program == True: #Infinite Loop, until the user quits
 
             user_name = 'Player' #Set the user name to Player
 
-        scoreboard_str = '                          Thanks for playing!\n \n Computer Score: ' + comp_score + '\n \n ' + user_name + "'s Score" + ': ' + usr_score + '\n \n Draws: ' + draws #Scoreboard string
+        scoreboard_str = '                          Thanks for playing!\n \n Computer Score: ' + comp_score + '\n \n ' + user_name + "'s Score" + ': ' + usr_score + '\n \n Tie Breakers: ' + draws #Scoreboard string
 
-        title = 'Rock Paper Scissors: Rainbow Edition' #Title of widget
-        
+        title = 'Sunny Storm and Snow' #Title of widget
+
+        #score = 'DeMello_score.jpg' exceeds 20 files
+
         menu = msgbox(scoreboard_str, title) #Help Menu
     
 
     def help_menu(): #Help Menu Function
 
-        image = r'C:\Users\alden\Desktop\Software Development\help_menu.jpg' #Image
+        image = 'DeMello_help_menu_v2.jpg' #Image
 
         help_m = 'HELP MENU' #Help Menu
 
         help_string = ' '
-
-        title = 'Rock Paper Scissors: Rainbow Edition' #Title of widget
+        title = 'Sunny Storm and Snow' #Title of widget
         
         menu = msgbox(help_string, title, image=image) #Help Menu
+
+        #Initial Code
       
     wel_reply = welcome() #Call the welcome function
     
     choice_check = check_choice(wel_reply) #Call the check choice function
-
-
-########################
-        #NOTES
-
-    # CHECK IF A NUMBER IS ENTERED 
-    
-#Settings Page?
-
-########################
 
 
